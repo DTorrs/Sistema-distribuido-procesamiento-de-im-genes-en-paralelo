@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package image_processing;
+
+service ImageProcessor {
+  rpc ProcessImage (ProcessRequest) returns (ProcessResponse) {}
+  rpc GetNodeStatus (StatusRequest) returns (StatusResponse) {}
+}
+
+message ProcessRequest {
+  int32 image_id = 1;
+  string image_path = 2;  // DEPRECATED: mantener por compatibilidad
+  repeated Transformation transformations = 3;
+  bytes image_data = 4;  // NUEVO: Enviar bytes de la imagen
+  string filename = 5;   // NUEVO: Nombre original del archivo
+}
+
+message Transformation {
+  int32 transformation_id = 1;
+  string name = 2;
+  string parameters = 3;
+}
+
+message ProcessResponse {
+  bool success = 1;
+  string result_path = 2;
+  string error_message = 3;
+  int32 processing_time_ms = 4;
+  bytes image_data = 5;  // ← NUEVO: Imagen procesada en bytes
+}
+
+message StatusRequest {
+  int32 node_id = 1;
+}
+
+message StatusResponse {
+  string status = 1;
+  float cpu_usage = 2;
+  float memory_usage = 3;
+}
