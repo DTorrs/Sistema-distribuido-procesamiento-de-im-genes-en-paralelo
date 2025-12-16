@@ -1,0 +1,10 @@
+six==1.16.0
+lxml==4.9.3
+spyne==2.12.16
+zeep==4.2.1
+requests==2.32.3
+grpcio==1.67.1
+grpcio-tools==1.67.1
+protobuf==5.28.3
+Pillow==10.1.0
+psutil==5.9.6
